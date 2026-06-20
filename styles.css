@@ -103,4 +103,11 @@ h2{font-size:24px;font-weight:800;margin:4px 0;letter-spacing:-.4px}
 .toast{position:absolute;bottom:80px;left:50%;transform:translateX(-50%) translateY(20px);background:#16181d;color:#fff;padding:9px 16px;border-radius:10px;font-size:13px;font-weight:600;opacity:0;transition:.25s;z-index:60;pointer-events:none}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 .hint-desktop{position:fixed;bottom:10px;left:0;right:0;text-align:center;color:#9aa0a6;font-size:13px}
-@media(max-width:480px){body{padding:4px}.hint-desktop{display:none}}
+@media(max-width:767px){
+  body{padding:0;align-items:flex-start;background:#fff}
+  .device{width:100vw;height:100vh;height:100dvh;border-radius:0;padding:0;box-shadow:none;background:#fff}
+  .screen-wrap{border-radius:0}
+  .camera-dot,.gesture-bar,.statusbar{display:none}
+  .screen{padding-top:env(safe-area-inset-top,0px)}
+  .hint-desktop{display:none}
+}

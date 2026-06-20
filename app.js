@@ -132,9 +132,14 @@ function toast(m) { const t = document.getElementById('toast'); t.textContent = 
 
 renderInspeksi();
 
-/* ---------------- fit device to viewport ---------------- */
+/* ---------------- fit device frame on desktop only ---------------- */
 function fitDevice() {
   const el = document.querySelector('.device');
+  if (window.innerWidth <= 767) {
+    el.style.transform = '';
+    el.style.margin = '';
+    return;
+  }
   const s = Math.min(1,
     (window.innerWidth - 8) / 360,
     (window.innerHeight - 8) / 780
