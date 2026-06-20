@@ -131,3 +131,21 @@ let tt;
 function toast(m) { const t = document.getElementById('toast'); t.textContent = m; t.classList.add('show'); clearTimeout(tt); tt = setTimeout(() => t.classList.remove('show'), 1500); }
 
 renderInspeksi();
+
+/* ---------------- fit device to viewport ---------------- */
+function fitDevice() {
+  const el = document.querySelector('.device');
+  const s = Math.min(1,
+    (window.innerWidth - 8) / 360,
+    (window.innerHeight - 8) / 780
+  );
+  if (s < 1) {
+    el.style.transform = `scale(${s.toFixed(4)})`;
+    el.style.margin = `${Math.round(780 * (s - 1) / 2)}px ${Math.round(360 * (s - 1) / 2)}px`;
+  } else {
+    el.style.transform = '';
+    el.style.margin = '';
+  }
+}
+fitDevice();
+window.addEventListener('resize', fitDevice);
