@@ -19,40 +19,45 @@ const HS = {
   R:  { vmount_r: [142, 159] },
   BT: { crown: [171, 141], cheek: [103, 229], strap: [171, 229], neck: [171, 300] },
 };
+/* a = mitigasi (langkah pencegahan agar risiko tak terjadi saat dicuci)
+   k = kompensasi bila risiko tetap terjadi — bisa berupa uang, service tambahan gratis, atau tidak ada */
 const RISK = {
-  visor:    { n: 'Visor / Kaca',       p: 'Prioritas Tinggi', d: 'Visor tergores dalam dan retak; visibilitas berkurang drastis dan keamanan terancam.',             a: 'Ganti visor dengan unit baru yang sesuai tipe helm.',                    k: 'Rp 150.000' },
-  karet:    { n: 'Karet List',         p: 'Sedang',           d: 'Karet list mengeras dan getas; berpotensi bocor saat hujan.',                                      a: 'Lepas karet lama, pasang karet list pengganti.',                         k: 'Rp 45.000'  },
-  logo:     { n: 'Logo Depan',         p: 'Rendah',           d: 'Stiker logo terkelupas sebagian; bersifat kosmetik.',                                              a: 'Tempel ulang stiker logo.',                                              k: 'Rp 15.000'  },
-  logo_b:   { n: 'Logo Belakang',      p: 'Rendah',           d: 'Logo belakang mulai terkelupas; bersifat kosmetik.',                                               a: 'Tempel ulang stiker logo belakang.',                                     k: 'Rp 15.000'  },
-  shell_b:  { n: 'Shell Belakang',     p: 'Sedang',           d: 'Terdapat baret pada shell belakang.',                                                              a: 'Poles dan buffing pada area yang tergores.',                             k: 'Rp 40.000'  },
-  topvent:  { n: 'Top Vent',           p: 'Sedang',           d: 'Top vent tersumbat atau longgar; aliran udara berkurang.',                                         a: 'Bersihkan saluran vent dan kencangkan atau ganti klip.',                 k: 'Rp 30.000'  },
-  shell_t:  { n: 'Shell Atas',         p: 'Sedang',           d: 'Baret permukaan pada shell atas.',                                                                 a: 'Poles dan buffing permukaan shell.',                                     k: 'Rp 40.000'  },
-  vmount_l: { n: 'Visor Mount Kiri',   p: 'Sedang',           d: 'Dudukan visor sisi kiri longgar; visor dapat goyang saat dipakai.',                                a: 'Kencangkan sekrup atau ganti dudukan visor.',                            k: 'Rp 35.000'  },
-  vmount_r: { n: 'Visor Mount Kanan',  p: 'Sedang',           d: 'Dudukan visor sisi kanan longgar; visor dapat goyang saat dipakai.',                               a: 'Kencangkan sekrup atau ganti dudukan visor.',                            k: 'Rp 35.000'  },
-  intercom: { n: 'Intercom',           p: 'Prioritas Tinggi', d: 'Modul intercom berisiko rusak terkena air selama proses pencucian.',                               a: 'Lepas intercom sebelum proses pencucian dimulai.',                       k: 'Tidak ada'   },
-  crown:    { n: 'Crown Pad',          p: 'Sedang',           d: 'Crown pad sobek atau lepas dari dudukan.',                                                         a: 'Jahit ulang atau rekatkan crown pad.',                                   k: 'Rp 35.000'  },
-  cheek:    { n: 'Cheek Pad',          p: 'Rendah',           d: 'Cheek pad berbau atau kotor berlebih.',                                                            a: 'Cuci ulang cheek pad secara terpisah.',                                  k: 'Tidak ada'   },
-  neck:     { n: 'Neck Roll',          p: 'Rendah',           d: 'Neck roll sedikit lepas dari jahitan.',                                                            a: 'Jahit ringan pada bagian yang lepas.',                                   k: 'Rp 20.000'  },
-  strap:    { n: 'Chin Strap',         p: 'Sedang',           d: 'Chin strap aus; keamanan kunci D-ring perlu diperiksa.',                                           a: 'Periksa dan ganti tali atau D-ring jika perlu.',                         k: 'Rp 25.000'  },
+  visor:    { n: 'Visor / Kaca',       p: 'Prioritas Tinggi', d: 'Visor sudah tergores dalam dan retak; rawan pecah atau makin parah saat dibersihkan.',              a: 'Bersihkan manual pakai kain microfiber lembut; hindari sikat dan air bertekanan tinggi.', k: 'Ganti unit visor (Rp 150.000)' },
+  karet:    { n: 'Karet List',         p: 'Sedang',           d: 'Karet list mengeras dan getas; rawan sobek atau terlepas saat terkena air.',                       a: 'Cuci lembut di sekitar list; hindari semprotan air bertekanan langsung ke karet.',       k: 'Rekat ulang gratis'            },
+  logo:     { n: 'Logo Depan',         p: 'Rendah',           d: 'Stiker logo depan sudah terkelupas sebagian; bersifat kosmetik.',                                  a: 'Lap searah dengan pelan di area stiker; tidak digosok.',                                  k: 'Tidak ada'                     },
+  logo_b:   { n: 'Logo Belakang',      p: 'Rendah',           d: 'Stiker logo belakang mulai terkelupas; bersifat kosmetik.',                                        a: 'Lap searah dengan pelan di area stiker; tidak digosok.',                                  k: 'Tidak ada'                     },
+  shell_b:  { n: 'Shell Belakang',     p: 'Sedang',           d: 'Ada baret halus pada shell belakang; bisa bertambah bila salah poles.',                            a: 'Gunakan kain microfiber dan cairan poles non-abrasif.',                                   k: 'Poles ulang gratis'            },
+  topvent:  { n: 'Top Vent',           p: 'Sedang',           d: 'Klip top vent longgar; rawan patah atau hilang saat dibuka untuk dibersihkan.',                    a: 'Bersihkan tanpa membongkar paksa; lepas-pasang klip dengan hati-hati.',                   k: 'Ganti klip vent (Rp 30.000)'   },
+  shell_t:  { n: 'Shell Atas',         p: 'Sedang',           d: 'Ada baret halus pada shell atas; bisa bertambah bila salah poles.',                                a: 'Gunakan kain microfiber dan cairan poles non-abrasif.',                                   k: 'Poles ulang gratis'            },
+  vmount_l: { n: 'Visor Mount Kiri',   p: 'Sedang',           d: 'Dudukan visor kiri longgar; sekrup rawan lepas atau hilang saat visor dilepas.',                   a: 'Tandai dan simpan sekrup; kencangkan kembali setelah dicuci.',                            k: 'Ganti dudukan (Rp 35.000)'     },
+  vmount_r: { n: 'Visor Mount Kanan',  p: 'Sedang',           d: 'Dudukan visor kanan longgar; sekrup rawan lepas atau hilang saat visor dilepas.',                  a: 'Tandai dan simpan sekrup; kencangkan kembali setelah dicuci.',                            k: 'Ganti dudukan (Rp 35.000)'     },
+  intercom: { n: 'Intercom',           p: 'Prioritas Tinggi', d: 'Modul elektronik; rawan rusak permanen bila terkena air saat pencucian.',                          a: 'Lepas intercom dari helm sebelum proses cuci dimulai.',                                   k: 'Tidak ada'                     },
+  crown:    { n: 'Crown Pad',          p: 'Sedang',           d: 'Crown pad sobek atau lepas dari dudukan; bisa makin lepas saat dicuci.',                           a: 'Cuci pad secara terpisah dengan tangan; tidak diperas keras.',                            k: 'Jahit ulang gratis'            },
+  cheek:    { n: 'Cheek Pad',          p: 'Rendah',           d: 'Cheek pad berbau atau kotor berlebih.',                                                            a: 'Rendam dan cuci terpisah dengan sabun lembut.',                                           k: 'Cuci ulang gratis'             },
+  neck:     { n: 'Neck Roll',          p: 'Rendah',           d: 'Neck roll sedikit lepas dari jahitan; rawan tertarik saat dicuci.',                                a: 'Cuci dengan tangan; hindari tarikan pada bagian yang lepas.',                             k: 'Jahit ulang gratis'            },
+  strap:    { n: 'Chin Strap',         p: 'Sedang',           d: 'Chin strap aus dan kunci D-ring perlu diperiksa; menyangkut keamanan.',                            a: 'Hindari rendam terlalu lama; keringkan menyeluruh agar tidak lembap.',                    k: 'Ganti tali/D-ring (Rp 25.000)' },
 };
 const prColor = p => p === 'Prioritas Tinggi' ? 'var(--red)' : p === 'Sedang' ? 'var(--amber)' : '#9aa0a6';
 
 /* ---------------- service pricing ---------------- */
 const TYPE_PRICE = { 'Standar': 35000, 'Full Face': 45000 };
 const FINISH = {
+  none:   { n: 'Tanpa', delta: 0,     t: 'Tanpa treatment finish khusus.' },
   glossy: { n: 'Glossy', delta: 0,     t: 'Poles standar agar cat kembali berkilau.' },
   doff:   { n: 'Doff',   delta: 15000, t: 'Treatment khusus matte-safe tanpa poles mengkilap.' },
 };
 const EXTRA_PRICE = 20000;
 
+/* part ids yang hanya ada pada helm Full Face — disembunyikan saat tipe Standar */
+const FULLFACE_ONLY = new Set(['visor', 'vmount_l', 'vmount_r']);
+function activeParts(view) {
+  const list = PARTS[view] || [];
+  return helmType === 'Full Face' ? list : list.filter(([id]) => !FULLFACE_ONLY.has(id));
+}
+
 /* PIN known only to the seller (prototype). Change to your shop's PIN. */
 const SELLER_PIN = '2468';
 
-function parseCost(k) {
-  if (!k) return 0;
-  const digits = String(k).replace(/[^0-9]/g, '');
-  return digits ? parseInt(digits, 10) : 0;
-}
 function rupiah(n) { return 'Rp ' + n.toLocaleString('id-ID'); }
 
 function miniIcon(v) { return `<img src="assets/helm/${VIEW_FILES[v]}.svg" alt="">`; }
@@ -61,7 +66,7 @@ function miniIcon(v) { return `<img src="assets/helm/${VIEW_FILES[v]}.svg" alt="
 let curView = 'F';
 const tagged = new Set();
 let helmType = 'Standar';
-let helmFinish = 'glossy';
+let helmFinish = 'none';
 let extraOn = false;
 let notesOpen = false;
 const customNotes = [];
@@ -115,7 +120,7 @@ function notesBlock() {
 }
 
 function renderInspeksi() {
-  const parts = PARTS[curView] || [], pos = HS[curView] || {};
+  const parts = activeParts(curView), pos = HS[curView] || {};
   let hot = '';
   parts.forEach(([id]) => { if (pos[id]) hot += hotspotSVG(id, pos[id][0], pos[id][1]); });
   const viewBtns = VIEWS.map(([k, lab]) => `<div class="view-b ${k === curView ? 'sel' : ''}" onclick="setView('${k}')">${miniIcon(k)}${lab}</div>`).join('');
@@ -135,7 +140,10 @@ function renderInspeksi() {
 
 function setView(v) { curView = v; renderInspeksi(); }
 function toggleTag(id) { tagged.has(id) ? tagged.delete(id) : tagged.add(id); renderInspeksi(); }
-function openInspeksi() { curView = 'F'; renderInspeksi(); go('s-inspeksi'); }
+function openInspeksi() {
+  document.getElementById('insp-title').textContent = 'Inspeksi Helm ' + helmType;
+  curView = 'F'; renderInspeksi(); go('s-inspeksi');
+}
 
 function toggleNotes() { notesOpen = !notesOpen; renderInspeksi(); }
 function addNote() {
@@ -156,9 +164,12 @@ function pickType(t) {
 }
 function pickFinish(f) {
   helmFinish = f;
-  document.getElementById('opt-glossy').classList.toggle('sel', f === 'glossy');
-  document.getElementById('opt-doff').classList.toggle('sel', f === 'doff');
-  updateSpoiler();
+  ['none', 'glossy', 'doff'].forEach(k => {
+    const el = document.getElementById('fin-' + k);
+    if (el) el.classList.toggle('sel', k === f);
+  });
+  const ap = document.getElementById('ap-total');
+  if (ap) ap.textContent = rupiah(computeTotal());
 }
 function toggleExtra() {
   extraOn = !extraOn;
@@ -178,7 +189,7 @@ function updateSpoiler() {
 /* ---------------- risiko ---------------- */
 function allTagged() {
   const out = [];
-  VIEWS.forEach(([v]) => (PARTS[v] || []).forEach(([id]) => { if (tagged.has(id)) out.push(id); }));
+  VIEWS.forEach(([v]) => activeParts(v).forEach(([id]) => { if (tagged.has(id)) out.push(id); }));
   return out;
 }
 function goRisiko() {
@@ -193,7 +204,7 @@ function goRisiko() {
           <span class="risk-name">${r.n}</span>
         </div>
         <div class="risk-row"><span class="risk-lbl">Risiko</span><span class="risk-val">${r.d}</span></div>
-        <div class="risk-row"><span class="risk-lbl">Antisipasi</span><span class="risk-val">${r.a}</span></div>
+        <div class="risk-row"><span class="risk-lbl">Mitigasi</span><span class="risk-val">${r.a}</span></div>
         <div class="risk-row"><span class="risk-lbl">Kompensasi</span><span class="risk-val risk-cost">${r.k}</span></div>
       </div>`; }).join('');
   }
@@ -223,7 +234,12 @@ function render(dir) {
 }
 function go(id) { if (stack[stack.length - 1] === id) return; stack.push(id); history.pushState({}, ''); render('fwd'); }
 function back() { if (stack.length > 1) history.back(); }
-function resetToHome() { stack = ['s-welcome']; tagged.clear(); customNotes.length = 0; curView = 'F'; history.pushState({}, ''); render('back'); }
+function resetToHome() {
+  stack = ['s-welcome']; tagged.clear(); customNotes.length = 0; curView = 'F';
+  notesOpen = false; extraOn = false; helmFinish = 'none';
+  pickType('Standar');
+  history.pushState({}, ''); render('back');
+}
 window.addEventListener('popstate', () => { if (stack.length > 1) { stack.pop(); render('back'); } else { history.pushState({}, ''); render('back'); } });
 history.replaceState({}, '');
 
@@ -235,6 +251,10 @@ function renderApproval() {
   document.getElementById('ap-tags').textContent = ids.length ? ids.map(i => RISK[i].n).join(', ') : 'kondisi standar';
   document.getElementById('ap-total').textContent = rupiah(computeTotal());
   document.getElementById('sw-extra').classList.toggle('on', extraOn);
+  ['none', 'glossy', 'doff'].forEach(k => {
+    const el = document.getElementById('fin-' + k);
+    if (el) el.classList.toggle('sel', k === helmFinish);
+  });
   document.getElementById('pin-in').value = '';
 }
 function approve() {

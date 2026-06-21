@@ -100,14 +100,14 @@
               <p class="sub" style="margin-top:14px">Inspeksi helm sambil menunggu — bantu seller proses lebih cepat.</p>
             </div>
           </div>
-          <div class="footer"><button class="btn" onclick="openInspeksi()">Inspeksi Mandiri →</button></div>
+          <div class="footer"><button class="btn" onclick="go('s-tipe')">Pilih Layanan →</button></div>
         </div>
 
         <!-- ==================== INSPEKSI ==================== -->
         <div class="screen" id="s-inspeksi">
           <div class="topbar">
             <div class="back-btn" onclick="back()">←</div>
-            <div class="title">Inspeksi Helm Anda</div>
+            <div class="title" id="insp-title">Inspeksi Helm Anda</div>
           </div>
           <p class="insp-hint">Tandai bagian yang rusak atau rawan.</p>
           <div id="insp-visual"></div>
@@ -131,10 +131,10 @@
             <div id="risk-list"></div>
             <div id="risk-notes"></div>
           </div>
-          <div class="footer"><button class="btn" onclick="go('s-tipe')">Pilih Layanan →</button></div>
+          <div class="footer"><button class="btn" onclick="go('s-approval')">Minta Persetujuan Seller →</button></div>
         </div>
 
-        <!-- ==================== TIPE + FINISH + SPOILER ==================== -->
+        <!-- ==================== TIPE + SPOILER ==================== -->
         <div class="screen" id="s-tipe">
           <div class="topbar">
             <div class="back-btn" onclick="back()">←</div>
@@ -143,7 +143,7 @@
           </div>
           <div class="scroll pad">
             <h2>Pilih Layanan</h2>
-            <p class="sub">Tentatif — seller menyetujui sebelum diproses.</p>
+            <p class="sub">Pilih tipe helm dulu — bagian inspeksi menyesuaikan tipe.</p>
 
             <div class="section-h">Tipe Helm</div>
             <div class="opt sel" id="opt-std" onclick="pickType('Standar')">
@@ -162,28 +162,12 @@
               </div>
               <div class="price">Rp 45.000</div>
             </div>
-
-            <div class="section-h">Tampilan / Finish</div>
-            <div class="opt sel" id="opt-glossy" onclick="pickFinish('glossy')">
-              <div class="txt">
-                <div class="t">Glossy</div>
-                <div class="d">Cat mengkilap — poles standar agar kembali berkilau</div>
-              </div>
-              <div class="price">+Rp 0</div>
-            </div>
-            <div class="opt" id="opt-doff" onclick="pickFinish('doff')">
-              <div class="txt">
-                <div class="t">Doff (Matte)</div>
-                <div class="d">Cat doff — treatment khusus matte-safe tanpa poles mengkilap</div>
-              </div>
-              <div class="price">+Rp 15.000</div>
-            </div>
           </div>
           <div class="spoiler">
             <div class="sp-row"><span class="sp-lbl">Perkiraan biaya (spoiler)</span><span class="sp-total" id="sp-total">Rp 0</span></div>
             <div class="sp-note">Tentatif — menunggu persetujuan seller</div>
           </div>
-          <div class="footer noborder"><button class="btn" onclick="go('s-approval')">Minta Persetujuan Seller →</button></div>
+          <div class="footer noborder"><button class="btn" onclick="openInspeksi()">Lanjut Inspeksi →</button></div>
         </div>
 
         <!-- ==================== APPROVAL (SELLER PIN ON BUYER PHONE) ==================== -->
@@ -203,6 +187,12 @@
             </div>
             <div class="label">PIN Seller</div>
             <input class="input" id="pin-in" type="password" inputmode="numeric" maxlength="6" placeholder="Masukkan PIN seller" />
+            <div class="label">Tampilan / Finish</div>
+            <div class="finish-row">
+              <div class="finish-opt sel" id="fin-none" onclick="pickFinish('none')">Tanpa</div>
+              <div class="finish-opt" id="fin-glossy" onclick="pickFinish('glossy')">Glossy</div>
+              <div class="finish-opt" id="fin-doff" onclick="pickFinish('doff')">Doff <span class="fp">+15K</span></div>
+            </div>
             <div class="card-box" style="margin-top:14px">
               <div class="kv-row"><span class="k">Nomor Antrian</span><span class="v" id="ap-q">—</span></div>
               <div class="kv-row"><span class="k">Tipe &amp; Finish</span><span class="v" id="ap-tipe">—</span></div>
