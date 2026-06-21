@@ -41,8 +41,10 @@
             <div class="welcome">
               <div class="qr-badge">
                 <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="3" y="3" width="7" height="7" rx="1" /><rect x="14" y="3" width="7" height="7" rx="1" />
-                  <rect x="3" y="14" width="7" height="7" rx="1" /><path d="M14 14h3v3M21 14v7M17 21h4M14 21h0" />
+                  <rect x="3" y="3" width="7" height="7" rx="1" />
+                  <rect x="14" y="3" width="7" height="7" rx="1" />
+                  <rect x="3" y="14" width="7" height="7" rx="1" />
+                  <path d="M14 14h3v3M21 14v7M17 21h4M14 21h0" />
                 </svg>
               </div>
               <h1>Selamat datang</h1>
@@ -63,7 +65,7 @@
           <div class="topbar">
             <div class="back-btn" onclick="back()">←</div>
             <div class="center">Data Diri</div>
-            <div style="width:34px"></div>
+            <div style="width: 34px"></div>
           </div>
           <div class="scroll pad">
             <h2 style="font-size: 26px; margin-top: 2px">Data Diri</h2>
@@ -82,11 +84,11 @@
           <div class="topbar">
             <div class="back-btn" onclick="back()">←</div>
             <div class="center">Antrian Anda</div>
-            <div style="width:34px"></div>
+            <div style="width: 34px"></div>
           </div>
           <div class="scroll">
             <div class="konf">
-              <h2 style="margin-top:14px">Anda masuk antrian</h2>
+              <h2 style="margin-top: 14px">Anda masuk antrian</h2>
               <p class="sub">Tunjukkan nomor ini bila diminta.</p>
               <div class="card-box">
                 <div class="cl">NOMOR ANTRIAN</div>
@@ -97,7 +99,7 @@
                 <div class="kv-row"><span class="k">Estimasi mulai diproses</span><span class="v" id="q-eta">—</span></div>
                 <div class="kv-row"><span class="k">Kode order</span><span class="v" id="q-code">—</span></div>
               </div>
-              <p class="sub" style="margin-top:14px">Inspeksi helm sambil menunggu — bantu seller proses lebih cepat.</p>
+              <p class="sub" style="margin-top: 14px">Inspeksi helm sambil menunggu — bantu seller proses lebih cepat.</p>
             </div>
           </div>
           <div class="footer"><button class="btn" onclick="go('s-tipe')">Pilih Layanan →</button></div>
@@ -120,7 +122,7 @@
           <div class="topbar">
             <div class="back-btn" onclick="back()">←</div>
             <div class="center">Ringkasan Risiko</div>
-            <div style="width:34px"></div>
+            <div style="width: 34px"></div>
           </div>
           <div class="scroll">
             <div class="pad">
@@ -139,7 +141,7 @@
           <div class="topbar">
             <div class="back-btn" onclick="back()">←</div>
             <div class="center">Pilih Layanan</div>
-            <div style="width:34px"></div>
+            <div style="width: 34px"></div>
           </div>
           <div class="scroll pad">
             <h2>Pilih Layanan</h2>
@@ -147,7 +149,7 @@
 
             <div class="section-h">Tipe Helm</div>
             <div class="opt sel" id="opt-std" onclick="pickType('Standar')">
-              <div class="ic"><img src="assets/icon/halfface.svg" alt="Half Face"></div>
+              <div class="ic"><img src="assets/helm/half_face/left.svg" alt="Half Face" /></div>
               <div class="txt">
                 <div class="t">Standar</div>
                 <div class="d">Half face, tanpa chin bar</div>
@@ -155,7 +157,7 @@
               <div class="price">Rp 35.000</div>
             </div>
             <div class="opt" id="opt-full" onclick="pickType('Full Face')">
-              <div class="ic"><img src="assets/icon/fullface.svg" alt="Full Face"></div>
+              <div class="ic"><img src="assets/icon/fullface.svg" alt="Full Face" /></div>
               <div class="txt">
                 <div class="t">Full Face</div>
                 <div class="d">Lengkap dengan chin bar</div>
@@ -164,8 +166,8 @@
             </div>
           </div>
           <div class="spoiler">
-            <div class="sp-row"><span class="sp-lbl">Perkiraan biaya (spoiler)</span><span class="sp-total" id="sp-total">Rp 0</span></div>
-            <div class="sp-note">Tentatif — menunggu persetujuan seller</div>
+            <div class="sp-row"><span class="sp-lbl">Perkiraan biaya</span><span class="sp-total" id="sp-total">Rp 0</span></div>
+            <div class="sp-note">Biaya minimum tanpa tambahan</div>
           </div>
           <div class="footer noborder"><button class="btn" onclick="openInspeksi()">Lanjut Inspeksi →</button></div>
         </div>
@@ -175,12 +177,15 @@
           <div class="topbar">
             <div class="back-btn" onclick="back()">←</div>
             <div class="center">Persetujuan Seller</div>
-            <div style="width:34px"></div>
+            <div style="width: 34px"></div>
           </div>
           <div class="scroll pad">
             <div class="approve-head">
               <div class="lock-badge">
-                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="11" width="16" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+                <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="4" y="11" width="16" height="9" rx="2" />
+                  <path d="M8 11V7a4 4 0 0 1 8 0v4" />
+                </svg>
               </div>
               <h2>Tunjukkan ke Seller</h2>
               <p class="sub">Seller masukkan PIN untuk menyetujui.</p>
@@ -193,7 +198,7 @@
               <div class="finish-opt" id="fin-glossy" onclick="pickFinish('glossy')">Glossy</div>
               <div class="finish-opt" id="fin-doff" onclick="pickFinish('doff')">Doff <span class="fp">+15K</span></div>
             </div>
-            <div class="card-box" style="margin-top:14px">
+            <div class="card-box" style="margin-top: 14px">
               <div class="kv-row"><span class="k">Nomor Antrian</span><span class="v" id="ap-q">—</span></div>
               <div class="kv-row"><span class="k">Tipe &amp; Finish</span><span class="v" id="ap-tipe">—</span></div>
               <div class="kv-row"><span class="k">Bagian ditandai</span><span class="v" id="ap-tags">—</span></div>
@@ -203,9 +208,10 @@
               <div class="switch" id="sw-extra" onclick="toggleExtra()"><div class="knob"></div></div>
               <div>
                 <div class="tt">Penanganan Tambahan</div>
-                <div class="ts">+20K (1 hari estimasi)</div>
+                <div class="ts">+15K (Ambil Besok)</div>
               </div>
             </div>
+            <div class="extra-note">Pembersihan ekstra untuk noda membandel, jamur, atau bau yang perlu perlakuan khusus — perlu tambahan waktu pengerjaan.</div>
           </div>
           <div class="footer"><button class="btn" onclick="approve()">Setujui &amp; Kirim →</button></div>
         </div>

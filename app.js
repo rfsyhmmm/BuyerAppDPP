@@ -46,21 +46,27 @@ const FINISH = {
   glossy: { n: 'Glossy', delta: 0,     t: 'Poles standar agar cat kembali berkilau.' },
   doff:   { n: 'Doff',   delta: 15000, t: 'Treatment khusus matte-safe tanpa poles mengkilap.' },
 };
-const EXTRA_PRICE = 20000;
+const EXTRA_PRICE = 15000;
 
-/* part ids yang hanya ada pada helm Full Face — disembunyikan saat tipe Standar */
-const FULLFACE_ONLY = new Set(['visor', 'vmount_l', 'vmount_r']);
+/* bagian yang disembunyikan per tipe helm (cabang inspeksi).
+   Standar = half face (tanpa visor, dudukan visor, dan cheek pad). */
+const HIDDEN_PARTS = {
+  'Full Face': new Set(),
+  'Standar':   new Set(['visor', 'vmount_l', 'vmount_r', 'cheek']),
+};
 function activeParts(view) {
-  const list = PARTS[view] || [];
-  return helmType === 'Full Face' ? list : list.filter(([id]) => !FULLFACE_ONLY.has(id));
+  const hidden = HIDDEN_PARTS[helmType] || new Set();
+  return (PARTS[view] || []).filter(([id]) => !hidden.has(id));
 }
+/* folder gambar helm per tipe (Standar/half face punya set gambar sendiri) */
+function helmDir() { return helmType === 'Standar' ? 'half_face/' : ''; }
 
 /* PIN known only to the seller (prototype). Change to your shop's PIN. */
 const SELLER_PIN = '2468';
 
 function rupiah(n) { return 'Rp ' + n.toLocaleString('id-ID'); }
 
-function miniIcon(v) { return `<img src="assets/helm/${VIEW_FILES[v]}.svg" alt="">`; }
+function miniIcon(v) { return `<img src="assets/helm/${helmDir()}${VIEW_FILES[v]}.svg" alt="">`; }
 
 /* ---------------- buyer selections ---------------- */
 let curView = 'F';
@@ -129,7 +135,7 @@ function renderInspeksi() {
   const curLabel = VIEWS.find(v => v[0] === curView)[1];
   document.getElementById('insp-visual').innerHTML =
     `<div class="helmet-card">
-       <img src="assets/helm/${VIEW_FILES[curView]}.svg" alt="${curLabel}">
+       <img src="assets/helm/${helmDir()}${VIEW_FILES[curView]}.svg" alt="${curLabel}">
        <svg class="hotspot-overlay" viewBox="0 0 342 367">${hot}</svg>
      </div>
      <div class="views">${viewBtns}</div>`;
