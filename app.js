@@ -75,7 +75,9 @@ let helmType = 'Standar';
 let helmFinish = 'none';
 let extraOn = false;
 let notesOpen = false;
+let estimasi = 'Hari ini';
 const customNotes = [];
+const EST_IDS = { 'Hari ini': 'est-today', 'Besok': 'est-besok', 'Lusa': 'est-lusa' };
 
 /* ---------------- queue / order ---------------- */
 const orderCode = 'D-0106-00' + (Math.floor(Math.random() * 7) + 3);
@@ -177,6 +179,15 @@ function pickFinish(f) {
   const ap = document.getElementById('ap-total');
   if (ap) ap.textContent = rupiah(computeTotal());
 }
+function pickEst(v) {
+  estimasi = v;
+  Object.entries(EST_IDS).forEach(([val, id]) => {
+    const el = document.getElementById(id);
+    if (el) el.classList.toggle('sel', val === v);
+  });
+  const ae = document.getElementById('ap-est');
+  if (ae) ae.textContent = v;
+}
 function toggleExtra() {
   extraOn = !extraOn;
   document.getElementById('sw-extra').classList.toggle('on', extraOn);
@@ -242,7 +253,7 @@ function go(id) { if (stack[stack.length - 1] === id) return; stack.push(id); hi
 function back() { if (stack.length > 1) history.back(); }
 function resetToHome() {
   stack = ['s-welcome']; tagged.clear(); customNotes.length = 0; curView = 'F';
-  notesOpen = false; extraOn = false; helmFinish = 'none';
+  notesOpen = false; extraOn = false; helmFinish = 'none'; estimasi = 'Hari ini';
   pickType('Standar');
   history.pushState({}, ''); render('back');
 }
@@ -255,11 +266,16 @@ function renderApproval() {
   document.getElementById('ap-q').textContent = queueNum;
   document.getElementById('ap-tipe').textContent = helmType + ' · ' + FINISH[helmFinish].n;
   document.getElementById('ap-tags').textContent = ids.length ? ids.map(i => RISK[i].n).join(', ') : 'kondisi standar';
+  document.getElementById('ap-est').textContent = estimasi;
   document.getElementById('ap-total').textContent = rupiah(computeTotal());
   document.getElementById('sw-extra').classList.toggle('on', extraOn);
   ['none', 'glossy', 'doff'].forEach(k => {
     const el = document.getElementById('fin-' + k);
     if (el) el.classList.toggle('sel', k === helmFinish);
+  });
+  Object.entries(EST_IDS).forEach(([val, id]) => {
+    const el = document.getElementById(id);
+    if (el) el.classList.toggle('sel', val === estimasi);
   });
   document.getElementById('pin-in').value = '';
 }
@@ -280,6 +296,7 @@ function fillKonfirmasi() {
   document.getElementById('konf-tipe').textContent = helmType + ' · ' + FINISH[helmFinish].n;
   document.getElementById('konf-tags').textContent = ids.length ? ids.map(i => RISK[i].n).join(', ') : 'kondisi standar';
   document.getElementById('konf-notes').textContent = customNotes.length ? customNotes.join(', ') : '—';
+  document.getElementById('konf-est').textContent = estimasi;
   document.getElementById('konf-total').textContent = rupiah(computeTotal());
 }
 

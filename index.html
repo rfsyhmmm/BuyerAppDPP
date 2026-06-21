@@ -198,10 +198,17 @@
               <div class="finish-opt" id="fin-glossy" onclick="pickFinish('glossy')">Glossy</div>
               <div class="finish-opt" id="fin-doff" onclick="pickFinish('doff')">Doff <span class="fp">+15K</span></div>
             </div>
+            <div class="label">Estimasi Selesai</div>
+            <div class="finish-row">
+              <div class="finish-opt sel" id="est-today" onclick="pickEst('Hari ini')">Hari ini</div>
+              <div class="finish-opt" id="est-besok" onclick="pickEst('Besok')">Besok</div>
+              <div class="finish-opt" id="est-lusa" onclick="pickEst('Lusa')">Lusa</div>
+            </div>
             <div class="card-box" style="margin-top: 14px">
               <div class="kv-row"><span class="k">Nomor Antrian</span><span class="v" id="ap-q">—</span></div>
               <div class="kv-row"><span class="k">Tipe &amp; Finish</span><span class="v" id="ap-tipe">—</span></div>
               <div class="kv-row"><span class="k">Bagian ditandai</span><span class="v" id="ap-tags">—</span></div>
+              <div class="kv-row"><span class="k">Estimasi selesai</span><span class="v" id="ap-est">—</span></div>
               <div class="kv-row"><span class="k">Biaya layanan</span><span class="v" id="ap-total">—</span></div>
             </div>
             <div class="toggle-row">
@@ -239,6 +246,7 @@
                 <div class="kv-row"><span class="k">Tipe &amp; Finish</span><span class="v" id="konf-tipe">—</span></div>
                 <div class="kv-row"><span class="k">Bagian ditandai</span><span class="v" id="konf-tags">—</span></div>
                 <div class="kv-row"><span class="k">Catatan khusus</span><span class="v" id="konf-notes">—</span></div>
+                <div class="kv-row"><span class="k">Estimasi selesai</span><span class="v" id="konf-est">—</span></div>
                 <div class="kv-row"><span class="k">Biaya layanan</span><span class="v" id="konf-total">—</span></div>
                 <div class="kv-row"><span class="k">Status</span><span class="badge ok">DISETUJUI &amp; TERKIRIM</span></div>
               </div>
